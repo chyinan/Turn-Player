@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn Player - Select Music</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Removed Settings Button -->
+
+    <div id="settings-panel" class="settings-panel hidden">
+        <div class="settings-content">
+            <h2 class="settings-title">Settings</h2>
+
+            <!-- Background Color Section -->
+            <div class="setting-item">
+                <label for="bg-color-picker">Background Color</label>
+                <input type="color" id="bg-color-picker" value="#d1c7b7">
+            </div>
+
+            <!-- Label customization section -->
+            <div class="label-section">
+                <p class="label-text">Customize Record Label</p>
+                <button class="label-btn" id="select-label-btn">Choose Label Image</button>
+                <input type="file" id="label-input" accept="image/*" hidden>
+                <div id="label-preview" class="label-preview hidden">
+                    <img id="label-preview-img" src="" alt="Label Preview" />
+                    <button id="remove-label-btn" class="remove-btn">×</button>
+                </div>
+            </div>
+            
+            <button id="close-settings-btn" class="close-settings-btn">Close</button>
+        </div>
+    </div>
+
+    <div class="upload-container" id="upload-container">
+        <div class="upload-area" id="drop-zone">
+            <p>Drag & Drop Your Music Here</p>
+            <p class="separator">or</p>
+            <button class="upload-btn" id="select-file-btn">Browse Files</button>
+            <input type="file" id="file-input" accept="audio/*" hidden>
+        </div>
+    </div>
+
+    <!-- Player wrapper (hidden by default) -->
+    <div id="player-wrapper" class="hidden">
+        
+        <div id="player-container">
+            <!-- Album Jacket (The cover art sitting on the table) -->
+            <div id="album-jacket" class="hidden">
+                <img id="jacket-art" src="" alt="Album Cover" />
+            </div>
+
+            <div id="record-sleeve">
+                <!-- Platter/Mat base -->
+            </div>
+            <div id="record">
+                <img id="record-label" src="" alt="Record Label" />
+            </div>
+            <div id="tonearm">
+                <div id="headshell"></div>
+            </div>
+            
+            <!-- Time Display -->
+            <div id="time-display">0:00 / 0:00</div>
+        </div>
+        <audio id="audio-player" style="display: none;"></audio>
+        
+        <!-- Removed Play/Pause Button Overlay -->
+    </div>
+    <script type="module" src="/main.js"></script>
+</body>
+</html>

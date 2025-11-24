@@ -1,0 +1,526 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* General Styles */
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1a0f0a;
+  background-image: 
+    radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%),
+    repeating-linear-gradient(90deg, #2b1d0e 0px, #2b1d0e 10px, #362515 10px, #362515 12px);
+  font-family: 'Playfair Display', 'Georgia', serif;
+  overflow: hidden;
+  color: #e0d0b0;
+}
+
+/* Upload Page Styles */
+.upload-container {
+  text-align: center;
+  z-index: 10;
+}
+
+.upload-area {
+  border: 2px solid #d4af37; /* Gold border */
+  border-radius: 8px;
+  padding: 60px 90px;
+  background-color: rgba(20, 10, 5, 0.85);
+  box-shadow: 
+    0 0 0 4px #2b1d0e,
+    0 10px 30px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.upload-area::after {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    pointer-events: none;
+}
+
+.upload-area.drag-over {
+    background-color: rgba(43, 29, 14, 0.95);
+    transform: scale(1.02);
+    box-shadow: 0 0 20px #d4af37;
+}
+
+.upload-area p {
+  color: #d4af37;
+  font-size: 1.4em;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.upload-area .separator {
+    font-style: italic;
+    color: #8c7343;
+    font-family: 'Georgia', serif;
+}
+
+.upload-btn {
+    background: linear-gradient(to bottom, #d4af37, #aa771c);
+    color: #1a0f0a;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        0 4px 6px rgba(0,0,0,0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.upload-btn:hover {
+    background: linear-gradient(to bottom, #eacda3, #d6ae7b);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+}
+
+/* Label customization styles */
+.label-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.label-text {
+    color: #a89060;
+    font-size: 1em;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.label-btn {
+    background: transparent;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.label-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.label-preview {
+    margin-top: 20px;
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+    background: #1a0f0a;
+    border: 1px solid #d4af37;
+    border-radius: 50%;
+}
+
+.label-preview img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #800000;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.remove-btn:hover {
+    background: #a00000;
+    transform: scale(1.1);
+}
+
+/* Settings Panel Styles */
+.settings-btn {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: rgba(26, 15, 10, 0.8);
+    border: 1px solid #d4af37;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s;
+    color: #d4af37;
+}
+
+.settings-btn:hover {
+    background: #2b1d0e;
+    box-shadow: 0 0 15px #d4af37;
+    transform: rotate(90deg);
+}
+
+.settings-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.settings-content {
+    background: #1a0f0a;
+    padding: 40px 50px;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    box-shadow: 
+        0 0 0 5px #1a0f0a,
+        0 20px 50px rgba(0,0,0,0.8);
+    text-align: center;
+    width: 350px;
+    position: relative;
+}
+
+.settings-content::before {
+    content: '';
+    position: absolute;
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    pointer-events: none;
+}
+
+.settings-title {
+    color: #d4af37;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 15px;
+}
+
+.setting-item {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.setting-item label {
+    display: block;
+    color: #e0d0b0;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+#bg-color-picker {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #d4af37;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #2b1d0e;
+    padding: 2px;
+}
+
+.close-settings-btn {
+    background: transparent;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    padding: 12px 30px;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 15px;
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.close-settings-btn:hover {
+    background: #d4af37;
+    color: #1a0f0a;
+}
+
+
+/* Player Page Styles - THE TURNTABLE */
+#player-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    perspective: 1000px;
+}
+
+#player-container {
+  position: relative;
+  width: 80vmin;
+  height: 60vmin;
+  display: flex;
+  align-items: center;
+  background: #2b1d0e; /* Deep wood base */
+  border-radius: 15px;
+  box-shadow: 
+    0 0 0 2px #1a0f0a,
+    0 0 0 8px #5c4033, /* Beveled edge */
+    0 0 0 10px #d4af37, /* Gold trim */
+    0 30px 60px rgba(0,0,0,0.8);
+  /* overflow: hidden; */ /* Removed to allow album art to stick out */
+}
+
+/* Wood grain texture overlay for the player base */
+#player-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 4px);
+    pointer-events: none;
+}
+
+/* Album Jacket Styles */
+#album-jacket {
+    position: fixed; /* Changed from absolute to fixed to break out of overflow:hidden parent context if any, and stay on top */
+    left: calc(50% - 40vmin - 15vmin); /* Manually positioned relative to center minus player offset */
+    top: 50%;
+    transform: translateY(-50%) rotate(-5deg);
+    width: 40vmin;
+    height: 40vmin;
+    z-index: 100; /* Highest z-index */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    transition: transform 0.5s ease;
+}
+
+#album-jacket.hidden {
+    display: none !important;
+}
+
+/* When hovering, lift it up a bit */
+#album-jacket:hover {
+    transform: translateY(-52%) rotate(-2deg) scale(1.02);
+    z-index: 25; /* Pop over */
+}
+
+#jacket-art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Make space for the jacket by shifting player */
+#player-container {
+    margin-left: 15vmin; /* Shift right to make room for jacket on left */
+}
+
+
+/* The Platter Area */
+#record-sleeve {
+  width: 48vmin;
+  height: 48vmin;
+  border-radius: 50%;
+  background: #111;
+  box-shadow: 
+    inset 0 0 20px #000,
+    0 2px 5px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 6vmin;
+  top: 6vmin; /* (60 - 48) / 2 = 6 */
+  z-index: 5;
+  border: 2px solid #333;
+}
+
+#record {
+  width: 46vmin;
+  height: 46vmin;
+  border-radius: 50%;
+  position: absolute;
+  left: 7.3vmin; /* Adjusted for border width and visual centering */
+  top: 7.3vmin;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  background: 
+    radial-gradient(circle, #151515 38%, transparent 38%),
+    repeating-radial-gradient(
+      #111 0, 
+      #111 2px, 
+      #1a1a1a 3px, 
+      #1a1a1a 4px
+    );
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+#record::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.05) 100%);
+    pointer-events: none;
+}
+
+#record-label {
+    position: absolute;
+    width: 36%;
+    height: 36%;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 15;
+    box-shadow: 
+        inset 0 0 5px rgba(0,0,0,0.4),
+        0 0 2px rgba(0,0,0,0.5);
+    background-color: #f0e6d2;
+    border: 4px solid #111;
+}
+
+#record-label::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.5vmin;
+    height: 1.5vmin;
+    background: #d0d0d0;
+    border-radius: 50%;
+    box-shadow: 
+        inset 1px 1px 2px rgba(255,255,255,0.8),
+        1px 1px 2px rgba(0,0,0,0.6);
+    border: 1px solid #888;
+}
+
+#tonearm {
+  position: absolute;
+  right: 6vmin;
+  top: 15vmin; /* Moved down further to allow upward rotation without clipping */
+  width: 44vmin;
+  height: 1.5vmin;
+  background: linear-gradient(to bottom, #bf953f, #fcf6ba, #b38728);
+  transform-origin: 36vmin 0.75vmin;
+  transform: rotate(25deg); /* Initial state: Angled Up (Resting) */
+  transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1);
+  z-index: 20;
+  border-radius: 0.75vmin;
+  box-shadow: 2px 5px 5px rgba(0,0,0,0.4);
+}
+
+#tonearm::before {
+    content: '';
+    position: absolute;
+    left: 33vmin;
+    top: -3vmin;
+    width: 6vmin;
+    height: 6vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #555, #222);
+    border: 2px solid #d4af37;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    z-index: -1;
+}
+
+#tonearm::after {
+    content: '';
+    position: absolute;
+    right: 0vmin;
+    top: -1vmin;
+    width: 6vmin;
+    height: 3.5vmin;
+    background: linear-gradient(to right, #333, #111);
+    border-radius: 4px;
+    border-left: 2px solid #666;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+#headshell {
+  width: 7vmin;
+  height: 2.5vmin;
+  background: #111;
+  position: absolute;
+  left: -6vmin;
+  top: -0.5vmin;
+  border-radius: 2px 4px 4px 2px;
+  transform: rotate(25deg);
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.4);
+  border: 1px solid #333;
+}
+
+#headshell::after {
+    content: '';
+    position: absolute;
+    left: 0.5vmin;
+    top: -1.5vmin;
+    width: 3vmin;
+    height: 0.4vmin;
+    background: #d4af37;
+    border-radius: 2px;
+    transform: rotate(-15deg);
+}
+
+/* Time Display */
+#time-display {
+    position: absolute;
+    bottom: 4vmin;
+    right: 6vmin;
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
+    font-size: 1.8vmin;
+    letter-spacing: 0.2vmin;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    border: 1px solid #d4af37;
+    padding: 0.3vmin 1.5vmin 0.7vmin; /* Less top padding, more bottom padding to visually lift text */
+    background: rgba(0,0,0,0.4);
+    border-radius: 4px;
+    min-width: 10vmin;
+    text-align: center;
+    line-height: 1.2; /* Ensure line-height doesn't add too much extra space */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} 
+
+.hidden {
+  display:none !important;
+}
