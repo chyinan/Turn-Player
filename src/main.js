@@ -276,7 +276,8 @@ audioPlayer.addEventListener("timeupdate", () => {
 audioPlayer.addEventListener("loadedmetadata", updateTimeDisplay);
 
 // Keyboard controls
-window.addEventListener('keydown', (event) => {
+window.addEventListener('keydown', async (event) => {
+    // console.log('Key pressed:', event.key); 
     switch (event.key.toLowerCase()) {
         case ' ':
             event.preventDefault();
@@ -285,6 +286,23 @@ window.addEventListener('keydown', (event) => {
         case 'r':
             audioPlayer.currentTime = 0;
             if (!audioPlayer.paused) updateTonearmPosition();
+            break;
+        case 'f':
+            try {
+                const isFullscreen = await currentWindow.isFullscreen();
+                // console.log('Toggling fullscreen, current:', isFullscreen);
+                await currentWindow.setFullscreen(!isFullscreen);
+            } catch (err) {
+                console.error('Failed to toggle fullscreen:', err);
+            }
+            break;
+        case 'escape':
+            try {
+                // console.log('Exiting fullscreen');
+                await currentWindow.setFullscreen(false);
+            } catch (err) {
+                console.error('Failed to exit fullscreen:', err);
+            }
             break;
     }
 });

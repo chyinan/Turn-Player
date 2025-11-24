@@ -283,29 +283,46 @@ body {
     perspective: 1000px;
 }
 
+/* The Turntable Chassis */
 #player-container {
   position: relative;
   width: 80vmin;
   height: 60vmin;
   display: flex;
   align-items: center;
-  background: #2b1d0e; /* Deep wood base */
-  border-radius: 15px;
+  
+  /* Luxury Wood Texture */
+  background-color: #2e1a0f;
+  background-image: 
+    /* Subtle Noise */
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+    /* Base wood gradient */
+    linear-gradient(to bottom right, #3e2715, #251308, #150803);
+  
+  border-radius: 2vmin;
+  
+  /* Multi-layered shadow and border for 3D chassis look */
   box-shadow: 
-    0 0 0 2px #1a0f0a,
-    0 0 0 8px #5c4033, /* Beveled edge */
-    0 0 0 10px #d4af37, /* Gold trim */
-    0 30px 60px rgba(0,0,0,0.8);
-  /* overflow: hidden; */ /* Removed to allow album art to stick out */
+    inset 0 0 0 1px rgba(255,255,255,0.1), /* Highlight edge */
+    inset 0 0 6vmin rgba(0,0,0,0.8),       /* Inner vignette */
+    0 0 0 1px #000,                        /* Black outline */
+    0 0 0 0.8vmin #5a3d2b,                 /* Wood edge */
+    0 0 0 1.2vmin #1a0f0a,                 /* Dark rim */
+    0 0 0 1.5vmin #8a6e4b,                 /* Gold/Brass Trim outer */
+    0 20px 50px rgba(0,0,0,0.9),           /* Drop shadow */
+    0 5px 15px rgba(0,0,0,1);              /* Contact shadow */
 }
 
-/* Wood grain texture overlay for the player base */
+/* Glossy finish overlay */
 #player-container::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 4px);
+    top: 1vmin; left: 1vmin; right: 1vmin; bottom: 1vmin;
+    border-radius: 1.5vmin;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.02) 100%);
     pointer-events: none;
+    z-index: 2;
 }
 
 /* Album Jacket Styles */
@@ -350,10 +367,10 @@ body {
   width: 48vmin;
   height: 48vmin;
   border-radius: 50%;
-  background: #111;
+  background: radial-gradient(circle, #1a1a1a, #0a0a0a);
   box-shadow: 
-    inset 0 0 20px #000,
-    0 2px 5px rgba(0,0,0,0.5);
+    inset 0 0 0 0.2vmin #333,
+    0 1vmin 2vmin rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -364,6 +381,7 @@ body {
   border: 2px solid #333;
 }
 
+/* The Vinyl Record */
 #record {
   width: 46vmin;
   height: 46vmin;
@@ -376,6 +394,7 @@ body {
   justify-content: center;
   align-items: center;
   
+  /* Detailed Vinyl Texture */
   background: 
     radial-gradient(circle, #151515 38%, transparent 38%),
     repeating-radial-gradient(
@@ -387,6 +406,7 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }
 
+/* Vinyl Reflection (Anisotropic highlight) */
 #record::after {
     content: '';
     position: absolute;
@@ -410,6 +430,7 @@ body {
     border: 4px solid #111;
 }
 
+/* Center Spindle */
 #record-label::after {
     content: '';
     position: absolute;
@@ -425,6 +446,7 @@ body {
     border: 1px solid #888;
 }
 
+/* Tonearm Assembly */
 #tonearm {
   position: absolute;
   right: 6vmin;
@@ -440,6 +462,7 @@ body {
   box-shadow: 2px 5px 5px rgba(0,0,0,0.4);
 }
 
+/* Pivot Base Assembly */
 #tonearm::before {
     content: '';
     position: absolute;
@@ -454,6 +477,7 @@ body {
     z-index: -1;
 }
 
+/* Counterweight */
 #tonearm::after {
     content: '';
     position: absolute;
@@ -467,6 +491,7 @@ body {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 
+/* Headshell */
 #headshell {
   width: 7vmin;
   height: 2.5vmin;
@@ -480,6 +505,7 @@ body {
   border: 1px solid #333;
 }
 
+/* Finger lift */
 #headshell::after {
     content: '';
     position: absolute;
@@ -510,6 +536,56 @@ body {
     min-width: 10vmin;
     text-align: center;
     line-height: 1.2; /* Ensure line-height doesn't add too much extra space */
+}
+
+/* Decorative Screws */
+.screw {
+    position: absolute;
+    width: 1.5vmin;
+    height: 1.5vmin;
+    background: radial-gradient(circle at 30% 30%, #aaa, #555);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 0.2vmin rgba(0,0,0,0.8),
+        0 1px 1px rgba(255,255,255,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-size: 1vmin;
+    font-family: sans-serif;
+    line-height: 1;
+    text-shadow: 0 -1px 0 rgba(255,255,255,0.3);
+    z-index: 15;
+}
+
+.screw.top-left { top: 2vmin; left: 2vmin; transform: rotate(45deg); }
+.screw.top-right { top: 2vmin; right: 2vmin; transform: rotate(12deg); }
+.screw.bottom-left { bottom: 2vmin; left: 2vmin; transform: rotate(-20deg); }
+.screw.bottom-right { bottom: 2vmin; right: 2vmin; transform: rotate(90deg); }
+
+/* Power Light */
+#power-light {
+    position: absolute;
+    bottom: 5vmin;
+    right: 22vmin; /* Left of the time display */
+    width: 1vmin;
+    height: 1vmin;
+    border-radius: 50%;
+    background-color: #300; /* Off state: Dark Red */
+    box-shadow: inset 0 0.2vmin 0.3vmin rgba(0,0,0,0.5);
+    border: 1px solid #222;
+    transition: all 0.3s;
+    z-index: 15;
+}
+
+/* Active State for Light */
+.playing #power-light {
+    background-color: #ff3300; /* On state: Bright Red/Orange */
+    box-shadow: 
+        0 0 1vmin #ff3300,
+        0 0 2vmin #ff3300,
+        inset 0 0.2vmin 0.5vmin rgba(255,255,255,0.5);
 }
 
 @keyframes spin {
