@@ -199,7 +199,7 @@ function playMusic() {
     if (playTimeout) clearTimeout(playTimeout);
     
     // Move arm to position
-    recordDiv.style.animation = "spin 3s linear infinite";
+    recordDiv.style.animation = "spin 4s linear infinite";
     updateTonearmPosition();
     
     // Update button state immediately for feedback
